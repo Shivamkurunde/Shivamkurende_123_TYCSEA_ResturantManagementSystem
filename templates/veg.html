@@ -8,138 +8,139 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/1e8988dde9.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/Experiment.css">
-      <script src="/static/Experiment.js"></script>
-
+    <script src="/static/Experiment.js"></script>
 </head>
 
-
+<body>
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container mt-3">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 
     <div id="sectionVeg">
-
         <div class="Veg-Container">
-
             <div class="container">
                 <div class="row">
-
-                    <div class="col-12 col-md-6 col-lg-3">
-                          <div class="shadow menu-item-card p-3 mb-3">
-                               <img src="/static/images/menu/veg/veg-biryani.jpg" class="menu-item-image w-100" alt="Gym Food" />
-                               <h1 class="menu-card-title">Veg Biryani</h1>
-                               <p class="Dish-Price">Rs.120 </p>
-                                <a href="" class="menu-item-link">
-                                       Order Now
-                               </a>
-                              <div class="icon-conatiner">
-                                   <button class="btn add-to-cart-icon mr-auto">
-                                       <i class="fas fa-shopping-bag custom_icon"></i>
-                               </button>
-                              </div>
-                      </div>
+                    <div class="col-12 text-center mb-4">
+                        <h1 class="section-heading">Pure Veg Dishes</h1>
+                        <p class="section-description">Fresh, healthy, and delicious vegetarian meals</p>
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="shadow menu-item-card p-3 mb-3">
-                            <img src="/static/images/menu/veg/aloo-paratha.jpg" class="menu-item-image w-100" alt="Gym Food" />
-                            <h1 class="menu-card-title">Aloo Paratha</h1>
-                            <p class="Dish-Price">Rs.150 </p>
-                            <a href="" class="menu-item-link">
-                                Order Now
-                            </a>
-                             <button class="btn add-to-cart-icon">
-                                    <i class="fas fa-shopping-bag custom_icon"></i>
-                            </button>
-
+                            <img src="/static/images/menu/veg/veg-biryani.jpg" class="menu-item-image w-100" alt="Veg Biryani" />
+                            <h1 class="menu-card-title">Veg Biryani</h1>
+                            <p class="Dish-Price">₹120</p>
+                            
+                            {% if session.get('user_id') %}
+                                <form method="POST" action="/add-to-cart" style="display: inline;">
+                                    <input type="hidden" name="item_name" value="Veg Biryani">
+                                    <input type="hidden" name="item_price" value="120">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="category" value="Veg">
+                                    <button type="submit" class="menu-item-link btn">Add to Cart</button>
+                                </form>
+                                <a href="/cart" class="btn btn-outline-primary btn-sm mt-2">
+                                    <i class="fas fa-shopping-cart"></i> View Cart
+                                </a>
+                            {% else %}
+                                <a href="/auth/login" class="menu-item-link">Login to Order</a>
+                            {% endif %}
                         </div>
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="shadow menu-item-card p-3 mb-3">
-                            <img src="/static/images/menu/veg/dal-tadka.jpg" class="menu-item-image w-100" alt="Gym Food" />
-                            <h1 class="menu-card-title">Dal Tadka</h1>
-                            <p class="Dish-Price">Rs.120 </p>
-                            <a href="" class="menu-item-link">
-                                Order Now
-                            </a>
-                            <button class="btn add-to-cart-icon">
-                                    <i class="fas fa-shopping-bag custom_icon"></i>
-                            </button>
+                            <img src="/static/images/menu/veg/aloo-paratha.jpg" class="menu-item-image w-100" alt="Aloo Paratha" />
+                            <h1 class="menu-card-title">Aloo Paratha</h1>
+                            <p class="Dish-Price">₹150</p>
+                            
+                            {% if session.get('user_id') %}
+                                <form method="POST" action="/add-to-cart" style="display: inline;">
+                                    <input type="hidden" name="item_name" value="Aloo Paratha">
+                                    <input type="hidden" name="item_price" value="150">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="category" value="Veg">
+                                    <button type="submit" class="menu-item-link btn">Add to Cart</button>
+                                </form>
+                                <a href="/cart" class="btn btn-outline-primary btn-sm mt-2">
+                                    <i class="fas fa-shopping-cart"></i> View Cart
+                                </a>
+                            {% else %}
+                                <a href="/auth/login" class="menu-item-link">Login to Order</a>
+                            {% endif %}
+                        </div>
+                    </div>
 
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="shadow menu-item-card p-3 mb-3">
+                            <img src="/static/images/menu/veg/dal-tadka.jpg" class="menu-item-image w-100" alt="Dal Tadka" />
+                            <h1 class="menu-card-title">Dal Tadka</h1>
+                            <p class="Dish-Price">₹120</p>
+                            
+                            {% if session.get('user_id') %}
+                                <form method="POST" action="/add-to-cart" style="display: inline;">
+                                    <input type="hidden" name="item_name" value="Dal Tadka">
+                                    <input type="hidden" name="item_price" value="120">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="category" value="Veg">
+                                    <button type="submit" class="menu-item-link btn">Add to Cart</button>
+                                </form>
+                                <a href="/cart" class="btn btn-outline-primary btn-sm mt-2">
+                                    <i class="fas fa-shopping-cart"></i> View Cart
+                                </a>
+                            {% else %}
+                                <a href="/auth/login" class="menu-item-link">Login to Order</a>
+                            {% endif %}
                         </div>
                     </div>
                     
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="shadow menu-item-card p-3 mb-3">
-                            <img src="/static/images/menu/veg/Aloo-Gobi.jpg" class="menu-item-image w-100" alt="Gym Food" />
+                            <img src="/static/images/menu/veg/Aloo-Gobi.jpg" class="menu-item-image w-100" alt="Aloo Gobi" />
                             <h1 class="menu-card-title">Aloo Gobi</h1>
-                            <p class="Dish-Price">Rs.180 </p>
-                            <a href="" class="menu-item-link">
-                                Order Now
-                            </a>
-                              <button class="btn add-to-cart-icon">
-                                    <i class="fas fa-shopping-bag custom_icon"></i>
-                            </button>
-
-
+                            <p class="Dish-Price">₹180</p>
+                            
+                            {% if session.get('user_id') %}
+                                <form method="POST" action="/add-to-cart" style="display: inline;">
+                                    <input type="hidden" name="item_name" value="Aloo Gobi">
+                                    <input type="hidden" name="item_price" value="180">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="category" value="Veg">
+                                    <button type="submit" class="menu-item-link btn">Add to Cart</button>
+                                </form>
+                                <a href="/cart" class="btn btn-outline-primary btn-sm mt-2">
+                                    <i class="fas fa-shopping-cart"></i> View Cart
+                                </a>
+                            {% else %}
+                                <a href="/auth/login" class="menu-item-link">Login to Order</a>
+                            {% endif %}
                         </div>
                     </div>
 
                 </div>
             </div>
 
-            <div class=" d-flex justify-content-center align-items-end mb-3" >
-               <a href="/"> <button class="back-button  btn btn-primary ">Back</button></a>
+            <div class="d-flex justify-content-center align-items-end mb-3">
+                <a href="/"><button class="back-button btn btn-primary">Back to Home</button></a>
+                {% if session.get('user_id') %}
+                    <a href="/cart" class="btn btn-success ml-3">
+                        <i class="fas fa-shopping-cart"></i> Go to Cart
+                    </a>
+                {% endif %}
             </div>
-
         </div>
-
     </div>
-
-
-
-
-    <script>
-    function getCart() {
-        var cart = localStorage.getItem("cart");
-        return cart ? JSON.parse(cart) : [];
-    }
-
-    function saveCart(cart) {
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        var addToCartButtons = document.querySelectorAll(".add-to-cart-icon");
-
-        addToCartButtons.forEach(function(button) {
-            button.addEventListener("click", function(event) {
-                var card = event.target.closest(".menu-item-card");
-
-                var name = card.querySelector(".menu-card-title").textContent.trim();
-                var priceText = card.querySelector(".Dish-Price").textContent.trim(); // "Rs.120"
-                var price = parseInt(priceText.replace(/[^\d]/g, ""));
-
-                var cart = getCart();
-                var existingItem = cart.find(item => item.name === name);
-
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                } else {
-                    cart.push({
-                        name: name,
-                        priceText: priceText,
-                        price: price,
-                        quantity: 1
-                    });
-                }
-
-                saveCart(cart);
-                alert(name + " added to cart!");
-            });
-        });
-    });
-</script>
-
-
- 
 </body>
 </html>

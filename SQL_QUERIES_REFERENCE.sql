@@ -6,7 +6,7 @@
 -- Run these queries in phpMyAdmin → SQL tab
 -- Copy and paste any query to show data
 
--- ============================================
+-- ===========================================
 -- BASIC QUERIES (शुरुआती queries)
 -- ============================================
 
